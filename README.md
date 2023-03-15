@@ -1,7 +1,7 @@
 # k8s Tutorial
 
 # Tutorial 준비
-- k8s 클러스터 1대
+- k8s 클러스터
 
 # Tutorial 1 - Pod와 기본 명령어 사용하기
 
