@@ -3,7 +3,7 @@
 # Tutorial 준비
 - k8s 클러스터
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ git clone https://oss.navercorp.com/yoonje-c/k8s-tutorial.git
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ git clone https://github.com/yoonje/k8s-tutorial.git
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ cd k8s-tutorial
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl version
 Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.0", GitCommit:"70132b0f130acc0bed193d9ba59dd186f0e634cf", GitTreeState:"clean", BuildDate:"2019-12-07T21:20:10Z", GoVersion:"go1.13.4", Compiler:"gc", Platform:"darwin/amd64"}
