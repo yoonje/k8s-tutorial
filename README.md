@@ -10,7 +10,7 @@ Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.0", GitCom
 Server Version: version.Info{Major:"1", Minor:"16", GitVersion:"v1.16.15", GitCommit:"2adc8d7091e89b6e3ca8d048140618ec89b39369", GitTreeState:"clean", BuildDate:"2020-09-02T11:31:21Z", GoVersion:"go1.13.15", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-# Tutorial 1 - 기본 명령어 익히고 Pod 사용하기
+# Tutorial 1 - 기본 명령어와 Pod 사용하기
 
 #### Pod 생성하기
 ```bash
