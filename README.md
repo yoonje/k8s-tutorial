@@ -63,9 +63,6 @@ Containers:
       memory:             512Mi
       ncc/type.any:       1
     Environment:
-      NCC_CLUSTER_NAME:     pgd1
-      NCC_CLUSTER_NETWORK:  develop
-      NCC_CLUSTER_PHASE:    develop
       TZ:                   Asia/Seoul
     Mounts:
       /var/run/secrets/kubernetes.io/serviceaccount from default-token-v7p9r (ro)
