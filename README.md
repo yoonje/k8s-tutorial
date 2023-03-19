@@ -280,7 +280,7 @@ nginx-deployment-b974549f7-j52ms     1/1     Running   0          5m23s
 
 #### autoscale 명령 사용하기
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl autoscale deployment nginx-deployment --cpu-percent=50 --min=5 --max=10
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl autoscale deployment nginx-deployment --cpu-percent=3 --min=2 --max=5
 horizontalpodautoscaler.autoscaling/nginx-deployment autoscaled
 ```
 
@@ -288,14 +288,14 @@ horizontalpodautoscaler.autoscaling/nginx-deployment autoscaled
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get hpa
 NAME               REFERENCE                     TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-nginx-deployment   Deployment/nginx-deployment   <unknown>/50%   5         10        5          22s
+nginx-deployment   Deployment/nginx-deployment   <unknown>/3%   2         5         2          22s
 ```
 
 #### deployment 확인하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get deployment
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-nginx-deployment   5/5     5            5           7m21s
+nginx-deployment   2/2     2            2           7m21s
 ```
 
 #### Pod 목록 조회하기
@@ -304,22 +304,34 @@ nginx-deployment   5/5     5            5           7m21s
 NAME                                 READY   STATUS    RESTARTS   AGE
 nginx-deployment-b974549f7-4bxgz     1/1     Running   0          85s
 nginx-deployment-b974549f7-86nzt     1/1     Running   0          8m29s
-nginx-deployment-b974549f7-9bcm4     1/1     Running   0          85s
-nginx-deployment-b974549f7-dxj6z     1/1     Running   0          8m29s
-nginx-deployment-b974549f7-j52ms     1/1     Running   0          8m29s
 ```
 
 ### Pod 리소스 사용량 확인하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl top pod
 NAME                                 CPU(cores)   MEMORY(bytes)
-grafana-6384f0bbd2f8773c45d21270-0   23m          572Mi
 nginx-deployment-b974549f7-2xh5j     0m           3Mi
 nginx-deployment-b974549f7-j826d     0m           3Mi
-nginx-deployment-b974549f7-jw7gv     0m           3Mi
-nginx-deployment-b974549f7-lc4hm     0m           3Mi
-promxy-default-67f5b648c8-wcf8f      3m           69Mi
-vm-default-shortterm-0-0             8m           521Mi
+```
+
+### nginx stress test
+```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ ./load-cpu.sh 10.161.122.175
+```
+
+### Pod 리소스 사용량 확인하기
+```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl top pod
+NAME                                 CPU(cores)   MEMORY(bytes)
+nginx-deployment-b974549f7-cqt8t     6m           5Mi
+nginx-deployment-b974549f7-hrfkp     6m           5Mi
+```
+
+#### hpa 확인하기
+```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get hpa
+NAME               REFERENCE                     TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+nginx-deployment   Deployment/nginx-deployment   6%/3%           2         5         4          63s
 ```
 
 #### hpa 삭제하기
