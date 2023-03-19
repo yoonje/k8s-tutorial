@@ -151,21 +151,20 @@ deployment.apps/nginx-deployment created
 NAME                                 READY   STATUS    RESTARTS   AGE
 nginx-deployment-b974549f7-28nkd     1/1     Running   0          13s
 nginx-deployment-b974549f7-8kjh7     1/1     Running   0          13s
-nginx-deployment-b974549f7-m828w     1/1     Running   0          13s
 ```
 
 #### Deployment 목록 조회하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get deployment
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-nginx-deployment   3/3     3            3           108s
+nginx-deployment   2/2     2            2           108s
 ```
 
 #### ReplicaSet 조회하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get rs
 NAME                         DESIRED   CURRENT   READY   AGE
-nginx-deployment-b974549f7   3         3         3       2m7s
+nginx-deployment-b974549f7   2         2         2       2m7s
 ```
 
 #### Deployment로 replicas 개수 바꿔서 nginx 배포하기
@@ -176,7 +175,7 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 5 # 5개로 수정
+  replicas: 3 # 3개로 수정
   selector:
     matchLabels:
       app: nginx
@@ -203,22 +202,20 @@ NAME                                 READY   STATUS    RESTARTS   AGE
 nginx-deployment-b974549f7-28nkd     1/1     Running   0          4m24s
 nginx-deployment-b974549f7-7wx7z     1/1     Running   0          20s
 nginx-deployment-b974549f7-8kjh7     1/1     Running   0          4m24s
-nginx-deployment-b974549f7-ckpl6     1/1     Running   0          20s
-nginx-deployment-b974549f7-m828w     1/1     Running   0          4m24s
 ```
 
 #### Deployment 목록 조회하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get deployment
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-nginx-deployment   5/5     5            5           4m43s
+nginx-deployment   3/3     3            3           4m43s
 ```
 
 #### ReplicaSet 조회하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get rs
 NAME                         DESIRED   CURRENT   READY   AGE
-nginx-deployment-b974549f7   5         5         5       4m47s
+nginx-deployment-b974549f7   3         3         3       4m47s
 ```
 
 #### Deployment로 배포된 파드 삭제하기
@@ -233,8 +230,6 @@ pod "nginx-deployment-b974549f7-28nkd" deleted
 NAME                                 READY   STATUS    RESTARTS   AGE
 nginx-deployment-b974549f7-7wx7z     1/1     Running   0          3m9s
 nginx-deployment-b974549f7-8kjh7     1/1     Running   0          7m13s
-nginx-deployment-b974549f7-ckpl6     1/1     Running   0          3m9s
-nginx-deployment-b974549f7-m828w     1/1     Running   0          7m13s
 nginx-deployment-b974549f7-wljwt     1/1     Running   0          4s
 ```
 
@@ -281,13 +276,11 @@ NAME                                 READY   STATUS    RESTARTS   AGE
 nginx-deployment-b974549f7-86nzt     1/1     Running   0          5m23s
 nginx-deployment-b974549f7-dxj6z     1/1     Running   0          5m23s
 nginx-deployment-b974549f7-j52ms     1/1     Running   0          5m23s
-nginx-deployment-b974549f7-ltrgj     1/1     Running   0          5m23s
-nginx-deployment-b974549f7-zd2xp     1/1     Running   0          5m23s
 ```
 
 #### autoscale 명령 사용하기
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl autoscale deployment nginx-deployment --cpu-percent=50 --min=7 --max=15
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl autoscale deployment nginx-deployment --cpu-percent=5 --min=5 --max=10
 horizontalpodautoscaler.autoscaling/nginx-deployment autoscaled
 ```
 
@@ -295,14 +288,14 @@ horizontalpodautoscaler.autoscaling/nginx-deployment autoscaled
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get hpa
 NAME               REFERENCE                     TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-nginx-deployment   Deployment/nginx-deployment   <unknown>/50%   7         15        5          22s
+nginx-deployment   Deployment/nginx-deployment   <unknown>/5%    5         10        5          22s
 ```
 
 #### deployment 확인하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get deployment
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-nginx-deployment   6/7     7            6           7m21s
+nginx-deployment   5/5     5            5           7m21s
 ```
 
 #### Pod 목록 조회하기
@@ -314,8 +307,6 @@ nginx-deployment-b974549f7-86nzt     1/1     Running   0          8m29s
 nginx-deployment-b974549f7-9bcm4     1/1     Running   0          85s
 nginx-deployment-b974549f7-dxj6z     1/1     Running   0          8m29s
 nginx-deployment-b974549f7-j52ms     1/1     Running   0          8m29s
-nginx-deployment-b974549f7-ltrgj     1/1     Running   0          8m29s
-nginx-deployment-b974549f7-zd2xp     1/1     Running   0          8m29s
 ```
 
 #### hpa 삭제하기
@@ -335,8 +326,6 @@ nginx-deployment-b974549f7-86nzt     1/1     Running   0          13m
 nginx-deployment-b974549f7-9bcm4     1/1     Running   0          6m16s
 nginx-deployment-b974549f7-dxj6z     1/1     Running   0          13m
 nginx-deployment-b974549f7-j52ms     1/1     Running   0          13m
-nginx-deployment-b974549f7-ltrgj     1/1     Running   0          13m
-nginx-deployment-b974549f7-zd2xp     1/1     Running   0          13m
 ```
 
 #### HorizontalPodAutoscaler 생성하기
