@@ -241,7 +241,7 @@ deployment.extensions "nginx-deployment" deleted
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get pods
 ```
 
-#### Deployment로 nginx 재배포하기
+#### replica 설정 롤백 이후 Deployment로 nginx 재배포하기
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl apply -f sample/deployment.yaml
 deployment.apps/nginx-deployment created
@@ -273,7 +273,6 @@ nginx-svc                          LoadBalancer   172.24.250.48    10.161.122.17
 NAME                                 READY   STATUS    RESTARTS   AGE
 nginx-deployment-b974549f7-86nzt     1/1     Running   0          5m23s
 nginx-deployment-b974549f7-dxj6z     1/1     Running   0          5m23s
-nginx-deployment-b974549f7-j52ms     1/1     Running   0          5m23s
 ```
 
 #### autoscale 명령 사용하기
@@ -286,7 +285,7 @@ horizontalpodautoscaler.autoscaling/nginx-deployment autoscaled
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ kubectl get hpa
 NAME               REFERENCE                     TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-nginx-deployment   Deployment/nginx-deployment   <unknown>/3%   2         5         2          22s
+nginx-deployment   Deployment/nginx-deployment   <unknown>/3%    2         5         2          22s
 ```
 
 #### deployment 확인하기
