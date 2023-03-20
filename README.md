@@ -313,7 +313,7 @@ nginx-deployment-b974549f7-j826d     0m           3Mi
 
 ### nginx stress test
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ ./load-cpu.sh 10.161.122.175
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ /script/load-cpu.sh 10.161.122.175
 ```
 
 ### Pod 리소스 사용량 확인하기
