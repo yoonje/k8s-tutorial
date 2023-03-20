@@ -56,12 +56,10 @@ Containers:
       cpu:                4
       ephemeral-storage:  8Gi
       memory:             4Gi
-      ncc/type.any:       1
     Requests:
       cpu:                100m
       ephemeral-storage:  8Gi
       memory:             512Mi
-      ncc/type.any:       1
     Environment:
       TZ:                   Asia/Seoul
     Mounts:
