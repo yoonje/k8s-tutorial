@@ -87,6 +87,8 @@ Events:
   Normal  Pulled     40s   kubelet, xxxxxxxxxxxxx  Successfully pulled image "nginx:1.14.2"
   Normal  Created    39s   kubelet, xxxxxxxxxxxxx  Created container nginx
   Normal  Started    39s   kubelet, xxxxxxxxxxxxx  Started container nginx
+```
+```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ curl 10.161.35.143:80
 <!DOCTYPE html>
 <html>
